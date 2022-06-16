@@ -34,10 +34,8 @@ brew install python3
 - Copy and paste the line below into your `Terminal` to download this file:
 
 ```
-svn checkout  https://github.com/eyyytran/bootCamp/trunk/week2/day5/DC_game_project
+git clone https://github.com/eyyytran/DigitalCrafts_FencingSim.git
 ```
-
-- Give Github a minute to convert the file and install.
 
 ## Running the Game
 
@@ -50,4 +48,4 @@ python3 fencingGame.py
 
 I hope you enjoy the game.
 
-For more insight into the makings of this project, check out the article I wrote on (insert link here)
+For more insight into the makings of this project, check out the article I wrote on [Medium](https://medium.com/@ltatran94/6d0dcdb09fa2).
