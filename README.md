@@ -1,6 +1,7 @@
 # Fencing Simulator
 
 Thank you for taking the time to check out my first game project made in Python!
+For more insight into the makings of this project, check out the article I wrote on [Medium](https://medium.com/@ltatran94/6d0dcdb09fa2).
 
 ## The following is required to run the game:
 
@@ -47,5 +48,3 @@ python3 fencingGame.py
 ```
 
 I hope you enjoy the game.
-
-For more insight into the makings of this project, check out the article I wrote on [Medium](https://medium.com/@ltatran94/6d0dcdb09fa2).
