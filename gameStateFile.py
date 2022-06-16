@@ -1,6 +1,6 @@
 class GameState:
     def __init__(self):
-        self.status = 'init'    # 'init' or 'in progress' or 'exit'
+        self.status = 'init'    # 'init' or 'exit'
         self.player = None
         self.opponent = None
         self.listOfOpponents = []
