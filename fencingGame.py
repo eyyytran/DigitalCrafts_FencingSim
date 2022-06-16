@@ -72,12 +72,41 @@ def getPlayerChoice():
 
 def getOpponentAction():
     opponentAction = randint(1, 3)
+    rng = randint(0, 100)
     if gameState.player.lastAction == '1':
-        opponentAction = randint(1, 2)
+        if gameState.player.lastPoint == True:
+            if rng <= 70:
+                opponentAction = 2
+            if rng > 30:
+                opponentAction = 1
+        if gameState.player.lastPoint == False:
+            if rng <= 70:
+                opponentAction = 1
+            if rng > 30:
+                opponentAction = 2
     if gameState.player.lastAction == '2':
-        opponentAction = randint(2, 3)
+        if gameState.player.lastPoint == True:
+            if rng <= 70:
+                opponentAction = 3
+            if rng > 30:
+                opponentAction = 2
+        if gameState.player.lastPoint == False:
+            if rng <= 70:
+                opponentAction = 3
+            if rng > 30:
+                opponentAction = 1
     if gameState.player.lastAction == '3':
-        opponentAction = 1
+        if gameState.player.lastPoint == True:
+            if rng <= 70:
+                opponentAction = 1
+            if rng > 30:
+                opponentAction = 3
+        if gameState.player.lastPoint == False:
+            if rng <= 70:
+                opponentAction = 1
+            if rng > 30:
+                opponentAction = 3
+    gameState.player.resetLastPoint()
     return opponentAction
 
 
@@ -102,8 +131,6 @@ def printPoints():
 
 
 def handleResult():
-    gameState.player.resetAction()
-    print(gameState.player.lastAction)
     while True:
         train = input(
             'Your bout is over. Would you like to train before your next one? (Y/N)\n')
@@ -119,7 +146,8 @@ def handleResult():
         if replay.lower() == 'y':
             gameState.playAgain()
             selectOpponent()
-            printGameStartMessage()
+            printGameStartMessage(gameState.player.name,
+                                  gameState.opponent.name)
             printContentBorders()
             break
         elif replay.lower() == 'n':
