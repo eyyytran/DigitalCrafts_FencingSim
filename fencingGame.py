@@ -122,10 +122,12 @@ def checkPoints():
 
 
 def printPoints():
+    time.sleep(1)
     printContentBorders()
     print('\nScore is:\n' + gameState.player.name + ' - ' + str(gameState.player.points) +
           '\n' + gameState.opponent.name + ' - ' + str(gameState.opponent.points) + '\n')
     printContentBorders()
+    time.sleep(1)
 
 
 def handleResult():
@@ -249,21 +251,15 @@ def runGame():
 
         if playerChoice == '1':
             handleChoice1(opponentAction, chance)
-            time.sleep(1)
             printPoints()
-            time.sleep(1)
             checkPoints()
         elif playerChoice == '2':
             handleChoice2(opponentAction, chance)
-            time.sleep(1)
             printPoints()
-            time.sleep(1)
             checkPoints()
         elif playerChoice == '3':
             handleChoice3(opponentAction, chance)
-            time.sleep(1)
             printPoints()
-            time.sleep(1)
             checkPoints()
         elif playerChoice == '4':
             gameState.setStatus('exit')
