@@ -8,14 +8,14 @@ from textstyling import *
 
 def initOpponents():
     opponents = [
-        Opponent('Aron Szilagyi', 'GOAT', 900, 1000),
-        Opponent('Kim Jung Hwan', 'A', 1000, 800),
-        Opponent('Olga Kharlan', 'A', 800, 800),
-        Opponent('Chloe Fox-Gitomer', 'B', 70, 70),
-        Opponent('Esther Lu', 'C', 50, 50),
-        Opponent('Isak Swaim', 'D', 30, 30),
-        Opponent('Mark Zuckerberg', 'E', 20, 20),
-        Opponent('Joe Schmoe', 'U', 10, 10)
+        Opponent('Aron Szilagyi', 'GOAT', 900, 1000, 100),
+        Opponent('Kim Jung Hwan', 'A', 1000, 800, 100),
+        Opponent('Olga Kharlan', 'A', 800, 800, 100),
+        Opponent('Chloe Fox-Gitomer', 'B', 70, 70, 80),
+        Opponent('Esther Lu', 'C', 50, 50, 50),
+        Opponent('Isak Swaim', 'D', 30, 30, 30),
+        Opponent('Mark Zuckerberg', 'E', 20, 20, 20),
+        Opponent('Joe Schmoe', 'U', 10, 10, 10)
     ]
     for opponent in opponents:
         gameState.addOpponent(opponent)
@@ -131,10 +131,15 @@ def printPoints():
 
 
 def handleResult():
-    gainedExperience = randint(0, 10)
-    gameState.player.experience += gainedExperience
-    print("\nYou gained ", gainedExperience,
-          " experience points!\n Your experience level is now ", gameState.player.experience, '.')
+    if gameState.player.experience < 100:
+        gainedExperience = randint(1, 10)
+        newExperience = gameState.player.experience + gainedExperience
+        gameState.player.experience = min(newExperience, 100)
+        if gameState.player.experience == 100:
+            print("Congratulations! You've maxed out on experience!")
+        else:
+            print("\nYou gained ", gainedExperience,
+                  " experience points!\n Your experience level is now ", gameState.player.experience, '.')
     while True:
         train = input(
             'Your bout is over. Would you like to train before your next one? (Y/N)\n')
@@ -276,7 +281,8 @@ def runGame():
         playerChoice = getPlayerChoice()
         opponentAction = getOpponentAction()
         chance = randint(0, 100)
-        experienceBoost = 100-gameState.player.experience
+        experienceBoost = (gameState.opponent.experience -
+                           gameState.player.experience)
         if playerChoice == '1':
             handleChoice1(opponentAction, chance, experienceBoost)
             printPoints()
