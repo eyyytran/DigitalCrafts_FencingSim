@@ -10,21 +10,18 @@ For more insight into the makings of this project, check out the article I wrote
 - Many computers already have Python installed. To check, try typing the following into your `Terminal`:
 
 ```
-python3
+python3 --version
 ```
 
 - If you do not have Python installed, follow the link below:
 
   - https://www.python.org/
 
-- Mac users may need to install Python using Homebrew. Copy and paste the following lines into your `Terminal`:
+- You may need to use Homebrew to install Python. Follow the link below:
 
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
+  - https://brew.sh/
 
-- You will be prompted to enter your Mac password.
-- Once Homebrew is finished installing, copy and paste the line below to install Python3.
+- Then run this line in your `terminal`.
 
 ```
 brew install python3
@@ -32,7 +29,7 @@ brew install python3
 
 ### Game Files
 
-- Copy and paste the line below into your `Terminal` to download this file:
+- Run the line below in your `terminal` to download this file:
 
 ```
 git clone https://github.com/eyyytran/DigitalCrafts_FencingSim.git
