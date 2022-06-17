@@ -107,5 +107,25 @@ def longAttack2():
 
 
 def doubleHold():
-    print(
-        "\nBoth fencers hesitate off the line.\nWhat's your next move?\n")
+    print("\n*Both fencers hold. Both attack*\n")
+    print("Halt! Simultaneous.\n")
+
+
+def failedAttack():
+    print("\n*You come off the line to attack.*")
+    time.sleep(1)
+    print("*And it fails!*\n")
+
+
+def failedFeint():
+    print("\n*You set up a long attack and feint.*")
+    time.sleep(1)
+    print("\nBut your opponent manages to parry you anyway!*\n")
+
+
+def failedParry():
+    print("\n*You see the attack coming*")
+    time.sleep(1)
+    print("*You set up your parry.*")
+    time.sleep(1)
+    print("*And it fails!*")

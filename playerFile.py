@@ -1,7 +1,8 @@
 class Player:
-    def __init__(self, name, lastPoint=False, lastAction='', speed=0, skill=0, point=0):
+    def __init__(self, name, lastPoint=False, lastAction='', experience=0, speed=0, skill=0, point=0):
         self.name = name
         self.lastAction = lastAction
+        self.experience = experience
         self.speed = speed
         self.skill = skill
         self.points = point

@@ -24,7 +24,7 @@ class GameState:
     def playAgain(self):
         self.player.resetPoints()
         self.opponent.resetPoints()
-        self.player.resetLastAction()
+        self.player.resetAction()
         self.result = None
         self.status = 'init'
 

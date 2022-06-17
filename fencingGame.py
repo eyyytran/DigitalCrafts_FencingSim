@@ -131,6 +131,10 @@ def printPoints():
 
 
 def handleResult():
+    gainedExperience = randint(0, 10)
+    gameState.player.experience += gainedExperience
+    print("\nYou gained ", gainedExperience,
+          " experience points!\n Your experience level is now ", gameState.player.experience, '.')
     while True:
         train = input(
             'Your bout is over. Would you like to train before your next one? (Y/N)\n')
@@ -156,15 +160,23 @@ def handleResult():
         print('Invalid Input: Try typing Y or N')
 
 
-def handleChoice1(opponentAction, chance):
+def handleChoice1(opponentAction, chance, experienceBoost):
     gameState.player.lastAction = '1'
     if opponentAction == 3:
-        attackCounterattack1()
-        gameState.player.addPoint()
+        if chance >= experienceBoost:
+            attackCounterattack1()
+            gameState.player.addPoint()
+        if chance < experienceBoost:
+            failedAttack()
+            gameState.opponent.addPoint()
     if opponentAction == 2:
         if gameState.player.speed > gameState.opponent.skill:
-            parryRiposteNo1()
-            gameState.player.addPoint()
+            if chance >= experienceBoost:
+                parryRiposteNo1()
+                gameState.player.addPoint()
+            if chance < experienceBoost:
+                parryRiposte2()
+                gameState.opponent.addPoint()
         if gameState.player.speed == gameState.opponent.skill:
             if chance <= 50:
                 parryRiposteNo1()
@@ -177,8 +189,12 @@ def handleChoice1(opponentAction, chance):
             gameState.opponent.addPoint()
     if opponentAction == 1:
         if gameState.player.speed > gameState.opponent.speed:
-            attackCounterattack1()
-            gameState.player.addPoint()
+            if chance >= experienceBoost:
+                attackCounterattack1()
+                gameState.player.addPoint()
+            if chance < experienceBoost:
+                failedAttack()
+                gameState.opponent.addPoint()
         if gameState.player.speed == gameState.opponent.speed:
             if chance <= 50:
                 attackCounterattack1()
@@ -191,12 +207,16 @@ def handleChoice1(opponentAction, chance):
             gameState.opponent.addPoint()
 
 
-def handleChoice2(opponentAction, chance):
+def handleChoice2(opponentAction, chance, experienceBoost):
     gameState.player.lastAction = '2'
     if opponentAction == 1:
         if gameState.player.skill > gameState.opponent.speed:
-            parryRiposte1()
-            gameState.player.addPoint()
+            if chance >= experienceBoost:
+                parryRiposte1()
+                gameState.player.addPoint()
+            if chance < experienceBoost:
+                failedParry()
+                gameState.opponent.addPoint()
         if gameState.player.skill == gameState.opponent.speed:
             if chance <= 50:
                 parryRiposte1()
@@ -214,18 +234,26 @@ def handleChoice2(opponentAction, chance):
         gameState.opponent.addPoint()
 
 
-def handleChoice3(opponentAction, chance):
+def handleChoice3(opponentAction, chance, experienceBoost):
     gameState.player.lastAction = '3'
     if opponentAction == 1:
         longAttack2()
         gameState.opponent.addPoint()
     if opponentAction == 2:
-        feint1()
-        gameState.player.addPoint()
+        if chance >= experienceBoost:
+            feint1()
+            gameState.player.addPoint()
+        if chance < experienceBoost:
+            failedFeint()
+            gameState.opponent.addPoint()
     if opponentAction == 3:
         if gameState.player.speed > gameState.opponent.speed:
-            attackCounterattack1()
-            gameState.player.addPoint()
+            if chance >= experienceBoost:
+                attackCounterattack1()
+                gameState.player.addPoint()
+            if chance < experienceBoost:
+                failedAttack()
+                gameState.opponent.addPoint()
         if gameState.player.speed == gameState.opponent.speed:
             if chance <= 50:
                 attackCounterattack1()
@@ -248,17 +276,17 @@ def runGame():
         playerChoice = getPlayerChoice()
         opponentAction = getOpponentAction()
         chance = randint(0, 100)
-
+        experienceBoost = 100-gameState.player.experience
         if playerChoice == '1':
-            handleChoice1(opponentAction, chance)
+            handleChoice1(opponentAction, chance, experienceBoost)
             printPoints()
             checkPoints()
         elif playerChoice == '2':
-            handleChoice2(opponentAction, chance)
+            handleChoice2(opponentAction, chance, experienceBoost)
             printPoints()
             checkPoints()
         elif playerChoice == '3':
-            handleChoice3(opponentAction, chance)
+            handleChoice3(opponentAction, chance, experienceBoost)
             printPoints()
             checkPoints()
         elif playerChoice == '4':
