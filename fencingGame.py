@@ -1,8 +1,9 @@
 from random import randint
+import time
 from gameStateFile import gameState
 from playerFile import Player
 from opponentFile import Opponent
-from styles import printContentBorders, printTitleBorders, printGameStartMessage, scene1, scene2
+from textstyling import attackCounterattack1, attackCounterattack2, doubleHold, feint1, feint2, getPlayerChoice, longAttack2, parryRiposte1, parryRiposte2, parryRiposteNo1, parryRiposteNo2, printContentBorders, printTitleBorders, printGameStartMessage, scene1, scene2
 
 
 def initOpponents():
@@ -65,11 +66,6 @@ def printOpponentChoices():
         print(index, ')', opponent)
 
 
-def getPlayerChoice():
-    return input(
-        'Choose an action:\n1)Attack\n2)Parry\n3)Attack in Preparation\n4)Exit the Game\n')
-
-
 def getOpponentAction():
     opponentAction = randint(1, 3)
     rng = randint(0, 100)
@@ -126,8 +122,10 @@ def checkPoints():
 
 
 def printPoints():
+    printContentBorders()
     print('\nScore is:\n' + gameState.player.name + ' - ' + str(gameState.player.points) +
           '\n' + gameState.opponent.name + ' - ' + str(gameState.opponent.points) + '\n')
+    printContentBorders()
 
 
 def handleResult():
@@ -159,35 +157,35 @@ def handleResult():
 def handleChoice1(opponentAction, chance):
     gameState.player.lastAction = '1'
     if opponentAction == 3:
-        print("Halt!\nAttack. Attack in Preparation.")
+        attackCounterattack1()
         gameState.player.addPoint()
     if opponentAction == 2:
         if gameState.player.speed > gameState.opponent.skill:
-            print('Halt!\nParry Riposte - No. Attack Touche.')
+            parryRiposteNo1()
             gameState.player.addPoint()
         if gameState.player.speed == gameState.opponent.skill:
             if chance <= 50:
-                print('Halt!\nParry Riposte - No. Attack Touche.')
+                parryRiposteNo1()
                 gameState.player.addPoint()
             if chance > 50:
-                print('Halt!\nAttack. Parry Riposte Touche.')
+                parryRiposte2()
                 gameState.opponent.addPoint()
         if gameState.player.speed < gameState.opponent.skill:
-            print('Halt!\nAttack. Parry Riposte Touche.')
+            parryRiposte2()
             gameState.opponent.addPoint()
     if opponentAction == 1:
         if gameState.player.speed > gameState.opponent.speed:
-            print('Halt!\nAttack. Contre Attack.')
+            attackCounterattack1()
             gameState.player.addPoint()
         if gameState.player.speed == gameState.opponent.speed:
             if chance <= 50:
-                print('Halt!\nAttack. Contre Attack.')
+                attackCounterattack1()
                 gameState.player.addPoint()
             if chance > 50:
-                print('Halt!\nAttack. Contre Attack.')
+                attackCounterattack2()
                 gameState.opponent.addPoint()
         if gameState.player.speed < gameState.opponent.speed:
-            print('Halt!\nAttack. Contre Attack.')
+            attackCounterattack2()
             gameState.opponent.addPoint()
 
 
@@ -195,47 +193,46 @@ def handleChoice2(opponentAction, chance):
     gameState.player.lastAction = '2'
     if opponentAction == 1:
         if gameState.player.skill > gameState.opponent.speed:
-            print('Halt!\nAttack. Parry Riposte Touche.')
+            parryRiposte1()
             gameState.player.addPoint()
         if gameState.player.skill == gameState.opponent.speed:
             if chance <= 50:
-                print('Halt!\nAttack. Parry Riposte Touche.')
+                parryRiposte1()
                 gameState.player.addPoint()
             if chance > 50:
-                print('Halt!\nAttack Touche.')
+                parryRiposteNo2()
                 gameState.opponent.addPoint()
         if gameState.player.skill < gameState.opponent.speed:
-            print('Halt!\nAttack Touche.')
+            parryRiposteNo2()
             gameState.opponent.addPoint()
     if opponentAction == 2:
-        print(
-            "Both fencers hesitate off the line.\nWhat's your next move?\n")
+        doubleHold()
     if opponentAction == 3:
-        print('Halt!\nAttack Touche.')
+        feint2()
         gameState.opponent.addPoint()
 
 
 def handleChoice3(opponentAction, chance):
     gameState.player.lastAction = '3'
     if opponentAction == 1:
-        print('Halt!\nAttack. Attack in Preparation.')
+        longAttack2()
         gameState.opponent.addPoint()
     if opponentAction == 2:
-        print('Halt!\nAttack Touche')
+        feint1()
         gameState.player.addPoint()
     if opponentAction == 3:
         if gameState.player.speed > gameState.opponent.speed:
-            print('Halt!\nAttack. Counter Attack.')
+            attackCounterattack1()
             gameState.player.addPoint()
         if gameState.player.speed == gameState.opponent.speed:
             if chance <= 50:
-                print('Halt!\nAttack. Counter Attack.')
+                attackCounterattack1()
                 gameState.player.addPoint()
             if chance > 50:
-                print('Halt!\nAttack. Counter Attack.')
+                attackCounterattack2()
                 gameState.opponent.addPoint()
         if gameState.player.speed < gameState.opponent.speed:
-            print('Halt!\nAttack. Counter Attack.')
+            attackCounterattack2()
             gameState.opponent.addPoint()
 
 
@@ -252,15 +249,21 @@ def runGame():
 
         if playerChoice == '1':
             handleChoice1(opponentAction, chance)
+            time.sleep(1)
             printPoints()
+            time.sleep(1)
             checkPoints()
         elif playerChoice == '2':
             handleChoice2(opponentAction, chance)
+            time.sleep(1)
             printPoints()
+            time.sleep(1)
             checkPoints()
         elif playerChoice == '3':
             handleChoice3(opponentAction, chance)
+            time.sleep(1)
             printPoints()
+            time.sleep(1)
             checkPoints()
         elif playerChoice == '4':
             gameState.setStatus('exit')
