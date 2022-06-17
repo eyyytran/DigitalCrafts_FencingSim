@@ -102,7 +102,7 @@ def feint2():
 
 def longAttack2():
     print("\n*You come off the line for a long attack.*")
-    print("*But your opponent is ready!")
+    print("*But your opponent is ready!*")
     print('Halt!\nAttack. Attack in Preparation.\n')
 
 

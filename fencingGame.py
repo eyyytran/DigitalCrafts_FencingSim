@@ -3,7 +3,7 @@ import time
 from gameStateFile import gameState
 from playerFile import Player
 from opponentFile import Opponent
-from textstyling import attackCounterattack1, attackCounterattack2, doubleHold, feint1, feint2, getPlayerChoice, longAttack2, parryRiposte1, parryRiposte2, parryRiposteNo1, parryRiposteNo2, printContentBorders, printTitleBorders, printGameStartMessage, scene1, scene2
+from textstyling import *
 
 
 def initOpponents():
