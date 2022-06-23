@@ -37,7 +37,7 @@ git clone https://github.com/eyyytran/DigitalCrafts_FencingSim.git
 
 ## Running the Game
 
-- `cd` into the DC_game_project folder
+- `cd` into the DigitalCrafts_FencingSim folder
 - Finally, copy and paste the following line to start the game:
 
 ```
